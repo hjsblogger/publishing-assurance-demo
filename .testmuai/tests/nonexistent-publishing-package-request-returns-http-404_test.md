@@ -1,7 +1,7 @@
 ---
 assurance:
   id: t-6
-  base: sha256:4a14d4aa67f3399d457a55b8b281e244de6ae791cc5044a8974320b3a49b449c
+  base: sha256:5e6d2334cadbce5a9eeb40eed2fcdd5d95107bfc59d15985cb984661fd8675c9
 ---
 # Nonexistent publishing package request returns HTTP 404
 

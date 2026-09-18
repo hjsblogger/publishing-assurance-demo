@@ -1,7 +1,7 @@
 ---
 assurance:
   id: t-5
-  base: sha256:1ade64d43789399a3b061bc8bb7b94788d18e1cd181e3d8ffd1bb43a0c873a6d
+  base: sha256:1953807b6a11598884263e22aca4110efb7f03745572bb503566511a93455c52
 ---
 # Each publishing package detail page shows its published commercial details
 

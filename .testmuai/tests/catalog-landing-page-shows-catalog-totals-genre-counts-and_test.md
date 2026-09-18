@@ -1,7 +1,7 @@
 ---
 assurance:
   id: t-3
-  base: sha256:966108f92fce720cd8ecfe82ca5a7564e98bba2baa697469b1874afa5a6df460
+  base: sha256:609a6ea28ea411512e44fb03a1d14c69ef5dacd68d858cf15f94a7a684e10653
 ---
 # Catalog landing page shows catalog totals, genre counts, and genre links
 

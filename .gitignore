@@ -20,3 +20,11 @@ website.log
 # Transient assurance locks — never commit
 .context/locks/
 .context/sessions/
+
+# Local-only files (not part of the shared repo)
+.hyperexecute/
+.updatedhyperexecute.yaml
+hyperexecute-cli.log
+.testmuai/tests/output-*/
+DEMO_STEPS.md
+run-tests.sh

@@ -1,7 +1,7 @@
 ---
 assurance:
   id: t-4
-  base: sha256:98263098d654085c465f929daa2c0db7bc64b56a2f8df4f3ecca95e7d5756e9e
+  base: sha256:9ca9268f5cd36019d736c5254e8a0d496b4bf76dc843f322af784c6a09152051
 ---
 # Package list reflects shared seat availability, one-seat wording, and fully booked actions
 

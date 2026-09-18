@@ -1,7 +1,7 @@
 ---
 assurance:
   id: t-2
-  base: sha256:52e8fa4186a3e77cd6baa8e3dc51f8cb1e8e8afb53a52069e95a979a643e7396
+  base: sha256:bcef68de64957de1c70628da81597ac89f3b8bf32f7673d7e6a3211bb5db54fa
 ---
 # Missing genre page returns 404 with the no-books-found message
 

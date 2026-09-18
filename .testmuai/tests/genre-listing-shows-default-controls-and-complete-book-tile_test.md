@@ -1,7 +1,7 @@
 ---
 assurance:
   id: t-1
-  base: sha256:f69a45b1c2c68f2fbd1b6c247adcce1a8fcb553ee89e854a32b6fe4e3cd5cadb
+  base: sha256:38eda0cdb065e78a624d89fcb2da074c3ccf3107d03652ca01f268cd8355aeb0
 ---
 # Genre listing shows default controls and complete book-tile metadata
 

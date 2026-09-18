@@ -26,5 +26,4 @@ website.log
 .updatedhyperexecute.yaml
 hyperexecute-cli.log
 .testmuai/tests/output-*/
-DEMO_STEPS.md
 run-tests.sh

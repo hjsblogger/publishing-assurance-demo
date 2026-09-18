@@ -46,6 +46,18 @@ requirements/book-publishing-website.md        ← the only source of truth
 
 The pipeline is [`.github/workflows/publishing-assurance-evidence.yml`](.github/workflows/publishing-assurance-evidence.yml).
 
+### Test Manager and execution
+
+Each `kane-cli testrun run` publishes its sealed evidence pack to Test Manager. Every
+designed test shows up as a test run in the project folder, with its pass/fail status:
+
+![Test Manager — Test Runs list for the publishing-demo folder](docs/images/test-manager-test-runs.png)
+
+Opening a run shows the test instance: duration, browser and OS configuration, attempts,
+and the step-by-step execution with a screenshot of the app at each step:
+
+![Test Manager — Test Instance with step-by-step execution](docs/images/test-manager-test-instance.png)
+
 ---
 
 ## Setup

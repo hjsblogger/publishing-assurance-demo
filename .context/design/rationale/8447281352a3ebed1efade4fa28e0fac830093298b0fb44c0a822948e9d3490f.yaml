@@ -1,0 +1,9 @@
+anchor: ac-113
+combinatorial:
+  reason: 'Techniques: equivalence partitioning + state / flow + CRUD round-trip. I used the representative tracked state of exactly one current-session submission because the source promises one-row withdrawal behavior and a one-seat restoration delta on the shared `/publish` pool. No covering array was needed because this journey has no independent multi-input interaction to combine; the risk-judged default strength would be 2 because no money, auth, or data-loss factor applies to this use-case.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: equivalence partitioning + state / flow + CRUD round-trip. I used the representative tracked state of exactly one current-session submission because the source promises one-row withdrawal behavior and a one-seat restoration delta on the shared `/publish` pool. No covering array was needed because this journey has no independent multi-input interaction to combine; the risk-judged default strength would be 2 because no money, auth, or data-loss factor applies to this use-case.'

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Submitting a non-empty search from the header carries the submitted term in the shareable search URL.","kind":"propagation","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"the submitted search term is present in the `/search` URL"}}}

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Submitting with a seat that is already taken, or not offered, is rejected with `That seat is no longer available this month. Please choose another.`","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"That seat is no longer available this month. Please choose another."}}}

@@ -1,0 +1,433 @@
+name: Fernwood Press · Assurance & Evidence
+
+# Requirements -> designed tests -> executed proof -> coverage gate.
+# Every stage is kane-cli; nothing is hand-authored.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'requirements/**'
+      - '.testmuai/tests/**'
+      - 'website/**'
+      - '.github/workflows/publishing-assurance-evidence.yml'
+  pull_request:
+    paths:
+      - 'requirements/**'
+      - '.testmuai/tests/**'
+      - 'website/**'
+  schedule:
+    - cron: '30 1 * * 1-5'      # 07:00 IST, weekdays
+  workflow_dispatch:
+    inputs:
+      max_pairs:
+        description: Max scenario+test pairs designed per use-case
+        default: '6'
+      coverage_threshold:
+        description: Minimum proven coverage %% before the build fails
+        default: '80'
+      force_design:
+        description: Redesign use-cases that already have a live design
+        type: boolean
+        default: false
+
+concurrency:
+  group: publishing-assurance-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  # The app under test lives in this repo and is started by the runner itself
+  # (scripts/serve_website.sh). kane-cli drives Chrome ON the runner, so loopback
+  # is reachable from the browser and no tunnel is needed.
+  APP_URL: http://127.0.0.1:5050
+  KANE_CLI_USER_AGENT: github-actions
+  MAX_PAIRS: ${{ inputs.max_pairs || '6' }}
+  COVERAGE_THRESHOLD: ${{ inputs.coverage_threshold || '80' }}
+
+jobs:
+  # ===========================================================================
+  # 1 — ASSURANCE. The requirements document is the input; a committed context
+  #     graph and a set of designed *_test.md files are the output.
+  # ===========================================================================
+  assurance:
+    name: 1 · Assurance — requirements to designed tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      usecase_count: ${{ steps.design.outputs.usecase_count }}
+      test_count: ${{ steps.design.outputs.test_count }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-kane
+        with:
+          username: ${{ secrets.LT_USERNAME }}
+          access-key: ${{ secrets.LT_ACCESS_KEY }}
+          project-id: ${{ secrets.TESTMUAI_PROJECT_ID }}
+          folder-id: ${{ secrets.TESTMUAI_FOLDER_ID }}
+
+      # The graph is an append-only commit chain. Reusing it across runs means
+      # unchanged requirements are not re-extracted and not re-billed.
+      # .kane-state holds the designed *_test.md files (see scripts/assurance.sh):
+      # kane-cli cannot rebuild them from the graph, so they travel with it.
+      - name: Restore context graph
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .context
+            .kane-state
+          key: kane-assurance-v1-${{ hashFiles('requirements/**') }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            kane-assurance-v1-${{ hashFiles('requirements/**') }}-
+            kane-assurance-v1-
+
+      # Design reads from the requirements, not from the live site, so the app does
+      # not need to be up here. The URL is still bound so designed tests carry the
+      # right start address into the evidence stage.
+      - name: Point kane-cli at the platform
+        run: kane-cli config set-url "$APP_URL"
+
+      - name: Ingest, extract, review, design
+        id: design
+        env:
+          REQ_GLOB: requirements/*.md
+          MAX_PAIRS: ${{ env.MAX_PAIRS }}
+          AUTO_APPROVE: 'true'
+          FORCE_DESIGN: ${{ inputs.force_design || 'false' }}
+        run: bash scripts/assurance.sh
+
+      # Saved even when a use-case failed to design: the graph is append-only and a
+      # failed session commits nothing, so what did land must not be lost. Not on
+      # cancel, when a write may have been cut short.
+      - name: Save context graph
+        # !cancelled() is required: without a status function GitHub prepends
+        # success() and the save would be skipped exactly when design failed.
+        if: ${{ !cancelled() && (steps.design.outcome == 'success' || steps.design.outcome == 'failure') }}
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            .context
+            .kane-state
+          key: kane-assurance-v1-${{ hashFiles('requirements/**') }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Assurance summary
+        if: always()
+        run: |
+          {
+            echo "## 1 · Assurance"
+            echo
+            echo "Source of truth: \`requirements/book-publishing-website.md\`"
+            echo
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Live use-cases | ${{ steps.design.outputs.usecase_count || 0 }} |"
+            echo "| Designed tests | ${{ steps.design.outputs.test_count || 0 }} |"
+            echo
+            echo '<details><summary>Context graph nodes</summary>'
+            echo
+            echo '```'
+            kane-cli context list || true
+            echo '```'
+            echo
+            echo '</details>'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish the graph and the designed tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: assurance-graph-${{ github.run_number }}
+          path: |
+            .context/
+            .testmuai/tests/
+            usecases.txt
+          # Required: upload-artifact skips any path whose name starts with a dot,
+          # so without it `.context/` is silently left out.
+          include-hidden-files: true
+          retention-days: 30
+          if-no-files-found: warn
+
+  # ===========================================================================
+  # 2 — EVIDENCE. Start the platform, run every designed test as ONE execution
+  #     so the whole suite seals into a single evidence pack. That pack is the
+  #     buyer artifact.
+  # ===========================================================================
+  evidence:
+    name: 2 · Evidence — execute and seal the pack
+    needs: assurance
+    runs-on: ubuntu-latest
+    # Authoring is serial (see Collect members) at ~6 min a member, so a run that
+    # authors the whole suite needs hours; replay-only runs finish far sooner.
+    timeout-minutes: 240
+    outputs:
+      pack: ${{ steps.pack.outputs.path }}
+      status: ${{ steps.execute.outputs.status }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-kane
+        with:
+          username: ${{ secrets.LT_USERNAME }}
+          access-key: ${{ secrets.LT_ACCESS_KEY }}
+          project-id: ${{ secrets.TESTMUAI_PROJECT_ID }}
+          folder-id: ${{ secrets.TESTMUAI_FOLDER_ID }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Brought up before anything that touches a browser. The seat pool is global
+      # and resets with the process, so every run starts from a full 6/4/2/1.
+      - name: Start the Fernwood Press platform
+        run: bash scripts/serve_website.sh
+
+      - name: Fetch the designed tests
+        uses: actions/download-artifact@v4
+        with:
+          name: assurance-graph-${{ github.run_number }}
+
+      # Recorded steps (output-<stem>/ next to each test) are what let a member
+      # replay instead of re-authoring. Without them every run authors all members.
+      - name: Restore recorded steps
+        uses: actions/cache/restore@v4
+        with:
+          path: .testmuai/tests/output-*
+          key: kane-recordings-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: kane-recordings-
+
+      # testrun has no --variables flag: members read .testmuai/variables/*.json,
+      # which is gitignored, so the runner starts with no test data at all.
+      - name: Provision test data
+        run: python3 scripts/test_data.py provision
+
+      - name: Collect members
+        id: members
+        run: |
+          set -euo pipefail
+          find .testmuai/tests -name '*_test.md' | sort > members.txt
+          echo "count=$(wc -l < members.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
+          cat members.txt
+
+          # Authoring takes the test's write lock; a second worker authoring at the
+          # same time drops to readonly and its work is discarded. Author serially.
+          #
+          # This suite stays serial even when every member is a pure replay: the
+          # onboarding seat pool is shared process-wide, so two members submitting
+          # at once can race for the same seat and one of them legitimately fails.
+          UNAUTHORED=0
+          while read -r t; do
+            stem=$(basename "$t" _test.md)
+            [ -f "$(dirname "$t")/output-$stem/.internal/meta.json" ] || UNAUTHORED=$((UNAUTHORED + 1))
+          done < members.txt
+          echo "Unauthored members: $UNAUTHORED (suite runs serially either way)"
+
+      # Plan and validate before spending a browser minute.
+      - name: Preflight
+        run: |
+          set -euo pipefail
+          # A member whose {{variable}} nothing supplies cannot pass on any re-run.
+          python3 scripts/test_data.py check members.txt
+          mapfile -t TESTS < members.txt
+          kane-cli testrun run "${TESTS[@]}" --dry-run \
+            --name "Fernwood preflight #${{ github.run_number }}"
+
+      - name: Execute the publishing suite
+        id: execute
+        run: |
+          set -uo pipefail
+          # Actions runs this as `bash -e`. Without +e the first failing suite
+          # aborts the script before PIPESTATUS is read.
+          set +e
+          mapfile -t TESTS < members.txt
+          kane-cli testrun run "${TESTS[@]}" \
+            --name "Fernwood regression #${{ github.run_number }} (${GITHUB_SHA:0:7})" \
+            --parallel 1 \
+            --on-failure continue \
+            --headless \
+            | tee testrun.ndjson
+          CODE=${PIPESTATUS[0]}
+          echo "status=$CODE" >> "$GITHUB_OUTPUT"
+          # A failing test still produces a valid pack — keep going and let the
+          # coverage gate decide. Only auth/infra (2) stops the pipeline here.
+          if [ "$CODE" -eq 2 ]; then exit 2; fi
+          exit 0
+
+      - name: Save recorded steps
+        if: always() && steps.execute.outcome != 'skipped'
+        uses: actions/cache/save@v4
+        with:
+          path: .testmuai/tests/output-*
+          key: kane-recordings-${{ github.run_id }}-${{ github.run_attempt }}
+
+      # After the suite, testrun writes every member's verdict into .context/ as
+      # execution facts — that is what `kane-cli cover` counts as proven. This
+      # job's graph is the only one that holds them, so hand it to coverage.
+      - name: Publish the executed graph
+        if: always() && steps.execute.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: assurance-graph-executed-${{ github.run_number }}
+          path: .context/
+          include-hidden-files: true
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Locate the sealed pack
+        id: pack
+        run: |
+          set -euo pipefail
+          # `|| true`: with pipefail a missing evidence dir would abort here,
+          # before the error below says what actually went wrong.
+          PACK=$( { find .testmuai/evidence -name '*.evidence' -printf '%T@ %p\n' 2>/dev/null || true; } \
+                 | sort -rn | head -1 | cut -d' ' -f2-)
+          if [ -z "$PACK" ]; then
+            echo "::error title=No evidence pack::testrun produced no sealed pack."
+            exit 1
+          fi
+          echo "path=$PACK" >> "$GITHUB_OUTPUT"
+          ls -lh "$PACK"
+
+      # L1 validation: the pack is complete, internally consistent, and its
+      # step evidence matches what the run claims happened.
+      - name: Validate the pack
+        run: |
+          set -euo pipefail
+          kane-cli evidence validate "${{ steps.pack.outputs.path }}" \
+            --profile L1 --json | tee evidence-validation.json
+          {
+            echo "## 2 · Evidence"
+            echo
+            echo "Pack: \`$(basename "${{ steps.pack.outputs.path }}")\`  ·  L1 validated"
+            echo
+            echo "View it locally with:"
+            echo
+            echo '```bash'
+            echo "kane-cli evidence serve $(basename "${{ steps.pack.outputs.path }}")"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # The app's own log is the first thing to read when a member failed for a
+      # reason the browser could not see (a 500, a traceback).
+      - name: Stop the platform
+        if: always()
+        run: |
+          echo "--- last 100 lines of website.log ---"
+          tail -100 website.log || true
+          [ -f .website.pid ] && kill "$(cat .website.pid)" 2>/dev/null || true
+
+      - name: Publish the evidence pack
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fernwood-evidence-${{ github.run_number }}
+          path: |
+            .testmuai/evidence/*.evidence
+            evidence-validation.json
+            testrun.ndjson
+            website.log
+          retention-days: 90
+          # warn: when no pack exists, "Locate the sealed pack" (or an earlier step)
+          # has already failed the job with the real reason.
+          if-no-files-found: warn
+
+  # ===========================================================================
+  # 3 — COVERAGE. Two axes: completeness owed by the graph, depth proven by the
+  #     pack. This is the stage that turns "tests passed" into "requirements met".
+  # ===========================================================================
+  coverage:
+    name: 3 · Coverage — designed vs proven
+    needs: [assurance, evidence]
+    # Only when a sealed pack exists: without one there is nothing to measure,
+    # and the artifact download fails with a misleading "artifact not found".
+    if: always() && needs.evidence.outputs.pack != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup-kane
+        with:
+          username: ${{ secrets.LT_USERNAME }}
+          access-key: ${{ secrets.LT_ACCESS_KEY }}
+          project-id: ${{ secrets.TESTMUAI_PROJECT_ID }}
+          folder-id: ${{ secrets.TESTMUAI_FOLDER_ID }}
+
+      # The graph as it stood after the suite ran: the designs plus the execution
+      # facts. The pre-run assurance graph has no runs, so it always proved 0%.
+      - name: Fetch the executed graph
+        uses: actions/download-artifact@v4
+        with:
+          name: assurance-graph-executed-${{ github.run_number }}
+          path: .context
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: fernwood-evidence-${{ github.run_number }}
+          path: .testmuai/evidence
+
+      - name: Compute the coverage ribbon
+        run: |
+          set -euo pipefail
+          PACK=$(find .testmuai/evidence -name '*.evidence' | head -1)
+          echo "PACK=$PACK" >> "$GITHUB_ENV"
+          # --from belongs to `cover`, so it goes BEFORE the `gaps` subcommand.
+          kane-cli cover --from "$PACK" gaps --rollup strict            > coverage.txt || true
+          kane-cli cover --from "$PACK" gaps --rollup strict --json     > coverage.json || true
+          cat coverage.txt
+
+      - name: Gate on proven coverage
+        id: gate
+        run: |
+          python3 scripts/coverage_gate.py \
+            --json coverage.json \
+            --table coverage.txt \
+            --pack "$PACK" \
+            --threshold "$COVERAGE_THRESHOLD"
+
+      - name: Comment the ribbon on the PR
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const ribbon = fs.existsSync('coverage.txt')
+              ? fs.readFileSync('coverage.txt', 'utf8').trim()
+              : '(no ribbon produced)';
+            const gate = '${{ steps.gate.outcome }}' === 'success' ? '🟢 passed' : '🔴 below gate';
+            const body = [
+              '### Fernwood Press assurance — designed × proven',
+              '',
+              `Coverage gate: ${gate} (threshold ${process.env.COVERAGE_THRESHOLD}%)`,
+              `Use-cases: ${{ needs.assurance.outputs.usecase_count || 0 }} · Designed tests: ${{ needs.assurance.outputs.test_count || 0 }}`,
+              '',
+              '<details><summary>Coverage ribbon</summary>',
+              '',
+              '```',
+              ribbon,
+              '```',
+              '',
+              '</details>',
+              '',
+              `Evidence pack is attached to [run #${{ github.run_number }}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).`,
+            ].join('\n');
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+      - name: Publish the coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fernwood-coverage-${{ github.run_number }}
+          path: |
+            coverage.txt
+            coverage.json
+          retention-days: 30
+          if-no-files-found: warn

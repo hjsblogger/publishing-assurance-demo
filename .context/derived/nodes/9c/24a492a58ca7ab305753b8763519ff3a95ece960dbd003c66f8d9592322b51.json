@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When the current browser session has no submissions, `/my-submissions` shows `You haven't submitted a manuscript yet.`.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"text `You haven't submitted a manuscript yet.` is shown on `/my-submissions`"}}}

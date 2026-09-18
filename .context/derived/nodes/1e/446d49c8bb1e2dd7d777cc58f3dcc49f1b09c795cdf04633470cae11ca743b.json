@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"A newly created submission is shown with the status `Under Review`.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"Under Review"}}}

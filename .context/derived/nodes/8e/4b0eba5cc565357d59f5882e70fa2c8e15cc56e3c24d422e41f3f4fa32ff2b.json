@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Requesting a published book detail page that does not exist returns an HTTP 404.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"HTTP 404"}}}

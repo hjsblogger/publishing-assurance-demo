@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Every testimonial on `/success-stories` includes a link to that testimonial author's book on the platform.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"forall","operand":"testimonial includes a link to that testimonial author's book on the platform"}}}

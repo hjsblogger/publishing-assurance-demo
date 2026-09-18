@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After a valid submission, the confirmation includes the author name.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"contains","operand":"<author name>"}}}

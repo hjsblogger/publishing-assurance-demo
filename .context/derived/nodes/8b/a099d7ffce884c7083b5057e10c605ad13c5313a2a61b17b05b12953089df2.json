@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Activating a title in the `Recently published` section opens the detail page for that same book.","kind":"propagation","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"selected recently published book title"}}}

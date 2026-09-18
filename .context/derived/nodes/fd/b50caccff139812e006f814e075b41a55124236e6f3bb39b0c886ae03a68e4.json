@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Activating `Compare all packages →` on the home page opens `/publish`.","kind":"propagation","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"/publish"}}}

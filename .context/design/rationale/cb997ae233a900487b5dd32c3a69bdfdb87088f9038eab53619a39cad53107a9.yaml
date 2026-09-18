@@ -1,0 +1,9 @@
+anchor: ac-103
+combinatorial:
+  reason: 'Techniques: Equivalence partitioning for a valid complete field set; CRUD round-trip for the persisted submission write; State / flow for submit-and-return behavior. Risk judged high because money and shared-capacity rules apply, so this write path was retained first under max_pairs=3.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: Equivalence partitioning for a valid complete field set; CRUD round-trip for the persisted submission write; State / flow for submit-and-return behavior. Risk judged high because money and shared-capacity rules apply, so this write path was retained first under max_pairs=3.'

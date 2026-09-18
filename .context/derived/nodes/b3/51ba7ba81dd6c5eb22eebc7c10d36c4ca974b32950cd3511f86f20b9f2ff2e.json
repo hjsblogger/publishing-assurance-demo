@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"For each exercised testimonial position on `/success-stories`, opening the testimonial's book link loads that testimonial author's book page on the platform.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"exists","operand":"opened page is the testimonial author's book page on the platform"}}}

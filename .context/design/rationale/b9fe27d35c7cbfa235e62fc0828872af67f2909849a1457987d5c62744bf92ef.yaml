@@ -1,0 +1,9 @@
+anchor: ac-73
+combinatorial:
+  reason: Applied equivalence partitioning to the repeated testimonial-card structure and retained one page-level content journey because every testimonial is expected to show the same field set. Count verification covers the fixed collection size named in REQ-09. Negative, boundary, edge, security, a11y, perf, and i18n scenario families were judged not applicable from the current source because the requirement states only the successful public display of static testimonial content and provides no failure behavior, limits, or alternate render modes.
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: Applied equivalence partitioning to the repeated testimonial-card structure and retained one page-level content journey because every testimonial is expected to show the same field set. Count verification covers the fixed collection size named in REQ-09. Negative, boundary, edge, security, a11y, perf, and i18n scenario families were judged not applicable from the current source because the requirement states only the successful public display of static testimonial content and provides no failure behavior, limits, or alternate render modes.

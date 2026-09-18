@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Seat availability is shared globally across visitors for the current month until a claimed seat is withdrawn or the app restarts.","kind":"propagation","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"a seat claimed by any visitor is unavailable to every visitor until it is withdrawn or the app restarts"}}}

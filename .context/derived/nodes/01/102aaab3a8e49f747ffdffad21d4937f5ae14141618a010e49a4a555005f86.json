@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"`/contact` displays the phone number `(555) 020-0200`.","kind":"absolute","risk":"low","derived":true,"expected_answer":{"operator":"equals","operand":"(555) 020-0200"}}}

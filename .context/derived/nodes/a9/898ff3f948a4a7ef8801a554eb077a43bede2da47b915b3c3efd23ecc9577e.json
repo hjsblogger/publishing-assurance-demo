@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After a submission is withdrawn from `/my-submissions`, that submission row is no longer shown in the table.","kind":"forbidden-presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"the withdrawn submission row remains visible in the `/my-submissions` table after withdrawal"}}}

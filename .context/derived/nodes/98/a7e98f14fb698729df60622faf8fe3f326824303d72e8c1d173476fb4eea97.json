@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The `Show` control on a genre listing offers 6, 12, and 20.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":[6,12,20]}}}

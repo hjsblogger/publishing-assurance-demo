@@ -1,0 +1,9 @@
+anchor: ac-26
+combinatorial:
+  reason: 'Techniques: eqp for package and availability-state classes; bva for seat-count boundaries. expand_bva on bounds min=1 and max=6 returned authoritative variants 0, 1, 2, 5, 6, 7, which justified exercising the outcome-changing boundaries at 1 remaining seat and 0 remaining seats plus the plural class above 1. Risk-judged interaction strength was 3 because money applies, but no covering-array reduction was used here because the outcome changes by availability class, so those classes stayed explicit within one boundary journey. Budget ceiling 3 applied; this scenario was retained as highest value because it covers the shared-seat behavior that changes package choice across all visitors.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: eqp for package and availability-state classes; bva for seat-count boundaries. expand_bva on bounds min=1 and max=6 returned authoritative variants 0, 1, 2, 5, 6, 7, which justified exercising the outcome-changing boundaries at 1 remaining seat and 0 remaining seats plus the plural class above 1. Risk-judged interaction strength was 3 because money applies, but no covering-array reduction was used here because the outcome changes by availability class, so those classes stayed explicit within one boundary journey. Budget ceiling 3 applied; this scenario was retained as highest value because it covers the shared-seat behavior that changes package choice across all visitors.'

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When a submission is withdrawn, the package's remaining seat count on `/publish` increases by exactly one.","kind":"delta","risk":"med","derived":true,"expected_answer":{"operator":"changed-by","operand":1,"baseline":"package remaining seat count on `/publish` before the withdrawal","unit":"seat"}}}

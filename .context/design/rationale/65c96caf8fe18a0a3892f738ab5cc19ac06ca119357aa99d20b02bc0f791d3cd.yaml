@@ -1,0 +1,9 @@
+anchor: ac-48
+combinatorial:
+  reason: Applied source-grounded happy-path coverage and equivalence partitioning to the single anonymous landing state. No boundary, negative, or covering-array expansion applied because the home page in REQ-02 exposes no user input, numeric control, or outcome-changing combinations on this path. Budget rank 1/4 because this one journey exercises most public discovery content on the page.
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: Applied source-grounded happy-path coverage and equivalence partitioning to the single anonymous landing state. No boundary, negative, or covering-array expansion applied because the home page in REQ-02 exposes no user input, numeric control, or outcome-changing combinations on this path. Budget rank 1/4 because this one journey exercises most public discovery content on the page.

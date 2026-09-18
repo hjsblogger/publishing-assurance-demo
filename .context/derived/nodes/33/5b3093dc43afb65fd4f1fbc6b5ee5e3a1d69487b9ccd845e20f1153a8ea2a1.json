@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each package card with seats remaining offers `Choose <package name>`.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"forall","operand":"package with seats left offers `Choose <package name>`"}}}

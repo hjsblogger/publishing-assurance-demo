@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The monthly package seat pools are capped at 6 Starter seats, 4 Standard seats, 2 Premium seats, and 1 Author's Choice seat.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"Starter 6 seats; Standard 4 seats; Premium 2 seats; Author's Choice 1 seat"}}}

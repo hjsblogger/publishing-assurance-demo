@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"On a package detail page that accepts submissions, the genre select defaults to `Select a genre`.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"Select a genre"}}}

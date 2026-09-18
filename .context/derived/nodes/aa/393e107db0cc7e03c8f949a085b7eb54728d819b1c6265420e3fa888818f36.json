@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Every page's footer includes a `Contact & support` link.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"forall","operand":"footer link `Contact & support` is visible"}}}

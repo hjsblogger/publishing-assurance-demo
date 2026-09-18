@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each package preview on the home page shows its price.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"forall","operand":"package preview includes a visible price"}}}

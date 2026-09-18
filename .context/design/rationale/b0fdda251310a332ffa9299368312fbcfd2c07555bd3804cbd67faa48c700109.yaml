@@ -1,0 +1,9 @@
+anchor: ac-110
+combinatorial:
+  reason: 'Techniques: Negative / error for rejected submission; Equivalence partitioning across two invalid seat classes that share one expected outcome. Risk judged high because a stale or forged seat can overbook shared monthly capacity on a priced package, so this path was retained under max_pairs=3.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: Negative / error for rejected submission; Equivalence partitioning across two invalid seat classes that share one expected outcome. Risk judged high because a stale or forged seat can overbook shared monthly capacity on a priced package, so this path was retained under max_pairs=3.'

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The published-books showcase exposes no basket control.","kind":"forbidden-presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"a basket control on a published-books catalog or genre listing page"}}}

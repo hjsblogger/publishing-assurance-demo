@@ -1,0 +1,9 @@
+anchor: ac-43
+combinatorial:
+  reason: Applied equivalence partitioning to model the distinct outcome-changing navigation promise separately from the static contact-details display. Pagination, boundary value, negative, auth, and state-flow techniques were not applicable because the source names a single link target and no alternate outcomes or constrained inputs. Budget ceiling is 3 pairs; this scenario was kept because all 2 candidate scenarios fit within budget.
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: Applied equivalence partitioning to model the distinct outcome-changing navigation promise separately from the static contact-details display. Pagination, boundary value, negative, auth, and state-flow techniques were not applicable because the source names a single link target and no alternate outcomes or constrained inputs. Budget ceiling is 3 pairs; this scenario was kept because all 2 candidate scenarios fit within budget.

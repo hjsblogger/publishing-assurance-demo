@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"On a package detail page that accepts submissions, the onboarding seat select lists only seats still available this month.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"forall","operand":"each onboarding seat option is still available this month"}}}

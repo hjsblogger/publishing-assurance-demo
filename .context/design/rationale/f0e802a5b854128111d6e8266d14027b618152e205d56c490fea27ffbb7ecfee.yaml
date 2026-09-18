@@ -1,0 +1,9 @@
+anchor: ac-82
+combinatorial:
+  reason: 'Equivalence partitioning across the documented known-title search term with exact-case, lower-case, and upper-case representatives. Risk-judged interaction strength was 2 because only user-reach and change-frequency apply, but no covering array was needed because this path varies only one input family: the entered search term variant.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: inferred'
+profile_family: unspecified
+surface_state: absent
+technique: 'Equivalence partitioning across the documented known-title search term with exact-case, lower-case, and upper-case representatives. Risk-judged interaction strength was 2 because only user-reach and change-frequency apply, but no covering array was needed because this path varies only one input family: the entered search term variant.'

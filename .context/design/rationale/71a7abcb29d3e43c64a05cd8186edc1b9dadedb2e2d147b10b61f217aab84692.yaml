@@ -1,0 +1,9 @@
+anchor: ac-56
+combinatorial:
+  reason: 'Techniques: equivalence partitioning + state / flow. I used the representative state transition from no known submission to one newly created submission in the same browser session because the source only grounds that the header count matches the current session''s stored submissions. No covering array was needed because there is no independent multi-input interaction to combine for this journey; the risk-judged default strength would be 2 (no money/auth/data-loss factors apply).'
+  strength: 2
+deferred_bindings: 1
+expected_how: 'expected_mode: runtime-derived'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: equivalence partitioning + state / flow. I used the representative state transition from no known submission to one newly created submission in the same browser session because the source only grounds that the header count matches the current session''s stored submissions. No covering array was needed because there is no independent multi-input interaction to combine for this journey; the risk-judged default strength would be 2 (no money/auth/data-loss factors apply).'

@@ -1,0 +1,9 @@
+anchor: ac-93
+combinatorial:
+  reason: 'Negative/error coverage plus equivalence partitioning for two source-defined no-results representatives: an unmatched non-empty term and a blank submission. Boundary value analysis applied to the blank submission as the source-stated minimum-content input. Risk-judged interaction strength was 2 because only user-reach applies, and no covering array was needed because the path varies a single input family whose representatives are documented to share one outcome.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Negative/error coverage plus equivalence partitioning for two source-defined no-results representatives: an unmatched non-empty term and a blank submission. Boundary value analysis applied to the blank submission as the source-stated minimum-content input. Risk-judged interaction strength was 2 because only user-reach applies, and no covering array was needed because the path varies a single input family whose representatives are documented to share one outcome.'

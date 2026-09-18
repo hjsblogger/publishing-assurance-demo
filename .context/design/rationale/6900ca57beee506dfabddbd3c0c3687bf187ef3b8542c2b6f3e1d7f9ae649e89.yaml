@@ -1,0 +1,9 @@
+anchor: ac-86
+combinatorial:
+  reason: Equivalence partitioning over the documented genre-match representative `Mystery`. The search/list result-set profile applied because this path asserts membership semantics across a returned collection. Risk-judged interaction strength was 2 because only user-reach and change-frequency apply, and no covering array was needed because only the search-term class varies in this path.
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: inferred'
+profile_family: unspecified
+surface_state: absent
+technique: Equivalence partitioning over the documented genre-match representative `Mystery`. The search/list result-set profile applied because this path asserts membership semantics across a returned collection. Risk-judged interaction strength was 2 because only user-reach and change-frequency apply, and no covering array was needed because only the search-term class varies in this path.

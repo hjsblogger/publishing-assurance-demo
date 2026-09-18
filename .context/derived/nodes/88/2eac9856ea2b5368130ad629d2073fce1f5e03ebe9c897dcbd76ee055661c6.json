@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After selecting `Publish Your Book` from the header, the publishing packages page lists exactly four packages.","kind":"count","risk":"low","derived":true,"expected_answer":{"operator":"equals","operand":4}}}

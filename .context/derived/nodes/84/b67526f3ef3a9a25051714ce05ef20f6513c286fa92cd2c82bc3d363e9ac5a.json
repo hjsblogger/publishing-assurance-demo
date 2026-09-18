@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Lower-case and upper-case forms of the same search term return the same results.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"the lower-case term returns the same results as the same term upper-cased"}}}

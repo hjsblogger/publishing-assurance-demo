@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Submitting the search box with no term shows `No books match your search`.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"No books match your search"}}}

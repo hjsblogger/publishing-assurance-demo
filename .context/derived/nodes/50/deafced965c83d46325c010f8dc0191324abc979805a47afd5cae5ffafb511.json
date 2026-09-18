@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After a valid submission, the confirmation includes the turnaround window in business days.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"exists","operand":"a confirmation turnaround window in business days"}}}

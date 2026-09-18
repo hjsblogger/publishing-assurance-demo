@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"A package with exactly one remaining seat shows the singular availability message `1 seat left this month`.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"1 seat left this month"}}}

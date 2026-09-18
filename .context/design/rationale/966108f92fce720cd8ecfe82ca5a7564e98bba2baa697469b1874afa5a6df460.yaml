@@ -1,0 +1,9 @@
+anchor: ac-9
+combinatorial:
+  reason: 'Techniques: Equivalence partitioning (`eqp`) and Pagination / sort / filter (`pagination`) via the Search / list profile. This is the baseline catalog-entry journey on `/books`, distinct from genre-list control variations because it exercises the source promises that apply only to the full catalog landing page. Budget ceiling max_pairs=3 retained this highest-value path.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: Equivalence partitioning (`eqp`) and Pagination / sort / filter (`pagination`) via the Search / list profile. This is the baseline catalog-entry journey on `/books`, distinct from genre-list control variations because it exercises the source promises that apply only to the full catalog landing page. Budget ceiling max_pairs=3 retained this highest-value path.'

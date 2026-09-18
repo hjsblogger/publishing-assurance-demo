@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Activating `Browse all published books →` on the home page opens `/books`.","kind":"propagation","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"/books"}}}

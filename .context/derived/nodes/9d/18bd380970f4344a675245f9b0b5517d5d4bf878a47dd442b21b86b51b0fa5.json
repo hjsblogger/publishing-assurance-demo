@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Submitting a non-empty search from the header shows the heading `Search results for \"<term>\"` on the results page.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"Search results for \"<term>\""}}}

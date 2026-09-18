@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Activating the `Start Publishing` call to action on the home page opens `/publish`.","kind":"propagation","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"/publish"}}}

@@ -1,0 +1,9 @@
+anchor: ac-12
+combinatorial:
+  reason: 'Techniques: Negative / error (`negative`) and Pagination / sort / filter (`pagination`) via the Search / list profile. This is a separate negative path because its outcome changes from a valid listing page to an error page with a 404 response. Budget ceiling max_pairs=3 retained it as the required negative genre-browsing path.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: Negative / error (`negative`) and Pagination / sort / filter (`pagination`) via the Search / list profile. This is a separate negative path because its outcome changes from a valid listing page to an error page with a 404 response. Budget ceiling max_pairs=3 retained it as the required negative genre-browsing path.'

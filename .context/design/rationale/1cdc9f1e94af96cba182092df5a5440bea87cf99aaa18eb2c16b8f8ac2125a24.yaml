@@ -1,0 +1,9 @@
+anchor: ac-71
+combinatorial:
+  reason: 'Techniques: equivalence partitioning. I used a representative non-home starting section and the single grounded footer route to `/contact`, whose destination is identified by the headed `Contact & support` page in the source. No covering array was needed because this journey has one route choice and no independent interacting inputs; the risk-judged default strength would be 2 (no money/auth/data-loss factors apply).'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: equivalence partitioning. I used a representative non-home starting section and the single grounded footer route to `/contact`, whose destination is identified by the headed `Contact & support` page in the source. No covering array was needed because this journey has one route choice and no independent interacting inputs; the risk-judged default strength would be 2 (no money/auth/data-loss factors apply).'

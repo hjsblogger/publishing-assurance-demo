@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"On a package detail page that accepts submissions, the manuscript status select defaults to `Select manuscript status`.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"Select manuscript status"}}}

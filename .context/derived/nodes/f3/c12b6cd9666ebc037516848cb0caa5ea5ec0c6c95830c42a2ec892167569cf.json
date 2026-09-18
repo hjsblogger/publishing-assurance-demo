@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Every testimonial on `/success-stories` shows the author's name.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"forall","operand":"testimonial shows the author's name"}}}

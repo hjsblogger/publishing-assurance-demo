@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each displayed result returned for the search term `Mystery` belongs to the `Mystery` genre.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"forall","operand":"each displayed result's linked book page shows the genre `Mystery`"}}}

@@ -1,0 +1,9 @@
+anchor: ac-127
+combinatorial:
+  reason: 'Derived from REQ-08''s routing promise for the detail-page CTA. Techniques: equivalence partitioning over resource state {existing published book}; happy-path navigation. Kept separate from the content-inspection scenario because activating the CTA changes the page outcome and proves a distinct propagation promise. No covering array applied: the source specifies no independent input dimensions to combine; the risk-judged interaction strength would have been 2 because no money, auth, or data-loss factor applies.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Derived from REQ-08''s routing promise for the detail-page CTA. Techniques: equivalence partitioning over resource state {existing published book}; happy-path navigation. Kept separate from the content-inspection scenario because activating the CTA changes the page outcome and proves a distinct propagation promise. No covering array applied: the source specifies no independent input dimensions to combine; the risk-judged interaction strength would have been 2 because no money, auth, or data-loss factor applies.'

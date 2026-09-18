@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Submitting a non-empty search from the header opens the `/search` results path.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"contains","operand":"/search"}}}

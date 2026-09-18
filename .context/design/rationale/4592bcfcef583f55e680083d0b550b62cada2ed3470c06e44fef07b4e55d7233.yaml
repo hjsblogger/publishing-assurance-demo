@@ -1,0 +1,9 @@
+anchor: ac-44
+combinatorial:
+  reason: 'Applied equivalence partitioning to the two publishing controls with the same promised outcome: `Start Publishing` and `Compare all packages →`. Kept as one scenario with equivalent-control variation because the outcome does not change. No covering-array expansion applied because there is only one equivalence family on this path. Budget rank 2/4 because these CTAs are primary public conversion routes into the author flow.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Applied equivalence partitioning to the two publishing controls with the same promised outcome: `Start Publishing` and `Compare all packages →`. Kept as one scenario with equivalent-control variation because the outcome does not change. No covering-array expansion applied because there is only one equivalence family on this path. Budget rank 2/4 because these CTAs are primary public conversion routes into the author flow.'

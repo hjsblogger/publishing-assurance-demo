@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Every page's header shows the Fernwood Press logo.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"forall","operand":"Fernwood Press logo is visible in the header"}}}

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"On `/success-stories`, the page shows exactly 6 testimonials.","kind":"count","risk":"low","derived":true,"expected_answer":{"operator":"equals","operand":6,"unit":"testimonials"}}}

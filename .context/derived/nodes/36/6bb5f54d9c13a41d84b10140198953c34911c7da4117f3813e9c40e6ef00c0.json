@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"`/contact` displays the support hours text `Monday–Friday, 9:00am–5:00pm.`.","kind":"absolute","risk":"low","derived":true,"expected_answer":{"operator":"equals","operand":"Monday–Friday, 9:00am–5:00pm."}}}

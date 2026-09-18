@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The home page states the catalog size as `<count>+ books published through our platform`.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"text matching `<count>+ books published through our platform`"}}}

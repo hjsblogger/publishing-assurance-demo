@@ -1,0 +1,9 @@
+anchor: ac-68
+combinatorial:
+  reason: 'Techniques: equivalence partitioning + state / flow. I used one representative cross-section traversal through the shared header controls because the use-case promise is reachability between platform sections, and the route values change page destinations rather than forming a combinatorial input matrix. No covering array was needed because there are no independent input dimensions to combine; the risk-judged default strength would be 2 (no money/auth/data-loss factors apply).'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: equivalence partitioning + state / flow. I used one representative cross-section traversal through the shared header controls because the use-case promise is reachability between platform sections, and the route values change page destinations rather than forming a combinatorial input matrix. No covering array was needed because there are no independent input dimensions to combine; the risk-judged default strength would be 2 (no money/auth/data-loss factors apply).'

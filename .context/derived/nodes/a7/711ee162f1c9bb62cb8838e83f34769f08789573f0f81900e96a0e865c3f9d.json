@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The `Choose a publishing package` section shows exactly four package previews.","kind":"count","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":4}}}

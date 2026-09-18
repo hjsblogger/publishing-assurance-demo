@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Every book tile shows the format.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"forall","operand":"each displayed book tile includes visible format text"}}}

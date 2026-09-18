@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each opened existing publishing package detail page shows a tagline.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"forall","operand":"opened existing package detail page shows a tagline"}}}

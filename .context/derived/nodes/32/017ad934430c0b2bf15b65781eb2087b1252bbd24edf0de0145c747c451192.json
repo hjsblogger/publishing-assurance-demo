@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Every page shows a top-of-page promotional banner reading `1,200+ authors published · Free ISBN on every package`.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"forall","operand":"top-of-page promotional banner text `1,200+ authors published · Free ISBN on every package` is visible"}}}

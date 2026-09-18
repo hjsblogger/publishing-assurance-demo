@@ -1,0 +1,9 @@
+anchor: ac-35
+combinatorial:
+  reason: 'Techniques: eqp across the four real package identities; covering_array requested at strength 3 because money applies and degraded to effective strength 1 because there is only one input dimension (package). The authoritative package coverage set enumerated Starter, Standard, Premium, and Author''s Choice, so this one happy-path scenario sweeps all four as equivalent-input variations without splitting them into separate outcome paths. Budget ceiling 3 applied; this scenario was retained because it covers the published package facts authors compare before purchase.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: eqp across the four real package identities; covering_array requested at strength 3 because money applies and degraded to effective strength 1 because there is only one input dimension (package). The authoritative package coverage set enumerated Starter, Standard, Premium, and Author''s Choice, so this one happy-path scenario sweeps all four as equivalent-input variations without splitting them into separate outcome paths. Budget ceiling 3 applied; this scenario was retained because it covers the published package facts authors compare before purchase.'

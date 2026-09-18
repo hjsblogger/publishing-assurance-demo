@@ -1,0 +1,9 @@
+anchor: ac-53
+combinatorial:
+  reason: 'I could mint 1 scenario: 1 happy. Applied source-grounded happy-path coverage and equivalence partitioning to the four recently published title links because the source promised the same outcome for each tile title. Kept this as one scenario with equivalent-control variation because choosing a different displayed title should not change the outcome family. No boundary, negative, covering-array, or budget cut applied because this route exposes no constrained input, no outcome-changing combinations, and no budget ceiling was provided. Full-set budget rank 4/4 because it covers the last distinct public branch off the home page.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'I could mint 1 scenario: 1 happy. Applied source-grounded happy-path coverage and equivalence partitioning to the four recently published title links because the source promised the same outcome for each tile title. Kept this as one scenario with equivalent-control variation because choosing a different displayed title should not change the outcome family. No boundary, negative, covering-array, or budget cut applied because this route exposes no constrained input, no outcome-changing combinations, and no budget ceiling was provided. Full-set budget rank 4/4 because it covers the last distinct public branch off the home page.'

@@ -1,0 +1,22 @@
+node_modules/
+.testmuai/evidence/
+.testmuai/sessions/
+.testmuai/variables/
+coverage.json
+coverage.txt
+testrun.ndjson
+members.txt
+usecases.txt
+.kane-state/
+
+# Sample app runtime
+website/.venv/
+website/__pycache__/
+__pycache__/
+*.pyc
+website.log
+.website.pid
+
+# Transient assurance locks — never commit
+.context/locks/
+.context/sessions/

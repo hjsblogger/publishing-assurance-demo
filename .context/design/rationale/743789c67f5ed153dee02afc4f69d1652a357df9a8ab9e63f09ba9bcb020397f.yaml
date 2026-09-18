@@ -1,0 +1,9 @@
+anchor: ac-115
+combinatorial:
+  reason: 'Techniques: equivalence partitioning + state / flow + CRUD round-trip. I used the representative transition from one successful submission to its first tracking view because the source promises one post-submit listing outcome with fixed columns, status, count alignment, and row action. No covering array was needed because there is no independent multi-input interaction to combine; the risk-judged default strength would be 2 because no money, auth, or data-loss factor applies to this use-case.'
+  strength: 2
+deferred_bindings: 1
+expected_how: 'expected_mode: runtime-derived'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: equivalence partitioning + state / flow + CRUD round-trip. I used the representative transition from one successful submission to its first tracking view because the source promises one post-submit listing outcome with fixed columns, status, count alignment, and row action. No covering array was needed because there is no independent multi-input interaction to combine; the risk-judged default strength would be 2 because no money, auth, or data-loss factor applies to this use-case.'

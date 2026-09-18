@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After selecting `Published Books` from the header, the catalog page shows a summary ending `books published through Fernwood Press so far.`","kind":"absolute","risk":"low","derived":true,"expected_answer":{"operator":"contains","operand":"books published through Fernwood Press so far."}}}

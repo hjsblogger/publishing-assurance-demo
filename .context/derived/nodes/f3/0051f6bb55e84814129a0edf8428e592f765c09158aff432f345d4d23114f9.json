@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The default selected sort option on a genre listing is `Title (A-Z)`.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"`Title (A-Z)`"}}}

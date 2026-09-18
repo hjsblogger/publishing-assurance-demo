@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each genre listed on `/books` provides a link to that genre’s listing page.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"forall","operand":"each displayed genre name on `/books` is a navigable link to a genre listing page"}}}

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"A genre listing offers a `List view` control.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"visible control `List view`"}}}

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After selecting `Success Stories` from the header, the page heading `Author success stories` is visible.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"exists","operand":"page heading `Author success stories` is visible"}}}

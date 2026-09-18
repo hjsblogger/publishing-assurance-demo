@@ -1,0 +1,9 @@
+anchor: ac-37
+combinatorial:
+  reason: 'Techniques: negative for the missing-resource path; eqp between existing package requests and nonexistent package requests, with the nonexistent class separated because it changes the outcome from a detail view to a 404. Budget ceiling 3 applied; this scenario was retained because the source promised a distinct failure mode that protects the package-discovery flow from generic errors.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: negative for the missing-resource path; eqp between existing package requests and nonexistent package requests, with the nonexistent class separated because it changes the outcome from a detail view to a 404. Budget ceiling 3 applied; this scenario was retained because the source promised a distinct failure mode that protects the package-discovery flow from generic errors.'

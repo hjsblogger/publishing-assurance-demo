@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each displayed search result tile shows the title as a link to the book.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"forall","operand":"title link to the book"}}}

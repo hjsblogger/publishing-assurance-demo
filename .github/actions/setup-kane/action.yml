@@ -1,0 +1,88 @@
+name: Setup kane-cli
+description: Install kane-cli, authenticate non-interactively, bind the TMS project/folder, and verify the identity.
+
+inputs:
+  version:
+    description: npm version/tag of @testmuai/kane-cli to install.
+    required: false
+    # Pinned so a new release cannot change design/testrun behaviour mid-demo.
+    # 0.8.15 is the release this repo's designs were produced and validated against.
+    default: '0.8.15'
+  username:
+    description: TestMu AI / LambdaTest username.
+    required: true
+  access-key:
+    description: TestMu AI / LambdaTest access key.
+    required: true
+  project-id:
+    description: TMS project id. Evidence packs publish into this project.
+    required: false
+    default: ''
+  folder-id:
+    description: TMS folder id. Evidence packs publish into this folder.
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Install Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install kane-cli
+      shell: bash
+      run: |
+        npm install -g "@testmuai/kane-cli@${{ inputs.version }}"
+        kane-cli --version
+
+    # kane-cli manages its own Chrome. On the hosted runner the preinstalled
+    # Chrome is already there, so point at it and skip the extra download.
+    - name: Point kane-cli at the runner's Chrome
+      shell: bash
+      run: |
+        CHROME_BIN="$(command -v google-chrome || command -v chromium-browser || true)"
+        if [ -n "$CHROME_BIN" ]; then
+          echo "KANE_CLI_CHROME_PATH=$CHROME_BIN"        >> "$GITHUB_ENV"
+          echo "KANE_CLI_SKIP_BROWSER_DOWNLOAD=1"        >> "$GITHUB_ENV"
+          echo "Using $CHROME_BIN"
+        else
+          echo "No system Chrome found — kane-cli will download its own."
+        fi
+
+    # Basic auth instead of --oauth: OAuth opens a browser, which no runner has.
+    - name: Authenticate
+      shell: bash
+      env:
+        LT_USERNAME: ${{ inputs.username }}
+        LT_ACCESS_KEY: ${{ inputs.access-key }}
+      run: |
+        set -euo pipefail
+        kane-cli login --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY"
+        kane-cli whoami
+
+    # Binding the project and folder is a SEPARATE step on purpose. Passing
+    # --project-id / --folder-id as login flags does not reliably bind them to the
+    # active profile, and an unbound profile means the sealed evidence pack never
+    # lands in the Test Manager dashboard — the run looks green and the buyer-facing
+    # artifact is missing. `config project` / `config folder` write the profile
+    # explicitly, and `config show` proves it before any credit is spent.
+    - name: Bind the Test Manager project and folder
+      shell: bash
+      env:
+        TESTMUAI_PROJECT_ID: ${{ inputs.project-id }}
+        TESTMUAI_FOLDER_ID: ${{ inputs.folder-id }}
+      run: |
+        set -euo pipefail
+        if [ -n "$TESTMUAI_PROJECT_ID" ]; then
+          kane-cli config project "$TESTMUAI_PROJECT_ID"
+        else
+          echo "::warning title=No TMS project::TESTMUAI_PROJECT_ID is not set; kane-cli will pick a project itself and evidence may land somewhere unexpected."
+        fi
+        if [ -n "$TESTMUAI_FOLDER_ID" ]; then
+          kane-cli config folder "$TESTMUAI_FOLDER_ID"
+        else
+          echo "::warning title=No TMS folder::TESTMUAI_FOLDER_ID is not set; kane-cli will pick a folder itself."
+        fi
+        kane-cli config show

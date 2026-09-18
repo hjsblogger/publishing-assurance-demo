@@ -1,0 +1,752 @@
+{
+  "version": 1,
+  "read_basis": "sha256:c867be742e4de532015b849e5b52ed9284108f9b398e145011b51d8a5df71049",
+  "source": {
+    "source_id": "book-publishing-website",
+    "source_cid": "sha256:70958141dc5a4d6c4f60373c3f932a9f31a68855aecab7a93c19e2d8c98e5a28"
+  },
+  "use_cases": [
+    {
+      "temp_ref": "n1",
+      "title": "Compare publishing packages and seat availability",
+      "description": "An author compares the four paid publishing packages on `/publish` and on each package detail page to choose between package names, prices, turnaround times, feature lists, package codes, and the remaining onboarding seats in the shared monthly pool; the flow distinguishes packages that can still be chosen from ones that are fully booked, uses specific seat-availability wording including singular vs plural counts, and returns a 404 for a package that does not exist instead of failing with a generic error page.",
+      "summary": "Compare packages and current seat availability.",
+      "actors": [
+        "author"
+      ],
+      "value": "Helps authors choose the right revenue-bearing publishing package before scarce monthly onboarding capacity is claimed.",
+      "risk": "high",
+      "cite": {
+        "anchor": "L60-L61",
+        "quote": "- `/publish` lists exactly four packages: Starter ($499, 45-day turnaround),"
+      },
+      "cites": [
+        {
+          "anchor": "L60-L61",
+          "quote": "- `/publish` lists exactly four packages: Starter ($499, 45-day turnaround),"
+        },
+        {
+          "anchor": "L63-L66",
+          "quote": "- A package with seats left shows `<n> seats left this month`, and the count is"
+        },
+        {
+          "anchor": "L67-L69",
+          "quote": "- Requesting a package that does not exist returns a 404 rather than an error page."
+        }
+      ],
+      "criteria": [
+        {
+          "text": "`/publish` lists exactly four packages with fixed package names, prices, and turnaround values: Starter ($499, 45-day), Standard ($999, 30-day), Premium ($1999, 21-day), and Author's Choice ($3499, 14-day).",
+          "cite": {
+            "anchor": "L60-L61",
+            "quote": "- `/publish` lists exactly four packages: Starter ($499, 45-day turnaround),"
+          }
+        },
+        {
+          "text": "The monthly seat pool is shared globally, with Starter at 6 seats, Standard at 4, Premium at 2, and Author's Choice at exactly 1.",
+          "cite": {
+            "anchor": "L182-L186",
+            "quote": "- **Seats are a shared, global monthly pool.** A seat claimed by any visitor is gone"
+          }
+        },
+        {
+          "text": "Each package card lists that package's features.",
+          "cite": {
+            "anchor": "L62-L62",
+            "quote": "- Each package card lists that package's features."
+          }
+        },
+        {
+          "text": "Seat-availability messaging uses `<n> seats left this month`, with the singular form `1 seat left this month` when exactly one remains.",
+          "cite": {
+            "anchor": "L63-L64",
+            "quote": "- A package with seats left shows `<n> seats left this month`, and the count is"
+          }
+        },
+        {
+          "text": "Available packages offer `Choose <package name>`, while fully booked packages show `Fully booked this month` and offer `View details` instead.",
+          "cite": {
+            "anchor": "L65-L66",
+            "quote": "- A package with seats left offers `Choose <package name>`; a package with none"
+          }
+        },
+        {
+          "text": "Opening a package shows its code (`FP-PKG-01` … `FP-PKG-04`), tagline, price, `Turnaround: <n> business days`, and feature list.",
+          "cite": {
+            "anchor": "L67-L68",
+            "quote": "- Opening a package shows its code (`FP-PKG-01` … `FP-PKG-04`), tagline, price and"
+          }
+        },
+        {
+          "text": "Requesting a package that does not exist returns a 404 rather than an error page.",
+          "cite": {
+            "anchor": "L69-L69",
+            "quote": "- Requesting a package that does not exist returns a 404 rather than an error page."
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:54141c57d434e80512a8f053a8646ae8d9f6cf02e9321981c0fed331ac504c34",
+        "reason": "Same author goal and scope as the existing package-comparison use-case; the revised source re-confirms the behavior and only adds test-fixture detail outside the business goal."
+      }
+    },
+    {
+      "temp_ref": "n2",
+      "title": "Submit a manuscript to a publishing package",
+      "description": "An author submits a manuscript into a chosen publishing package from that package's detail page by entering the book title, author name, email, genre, manuscript status, and one onboarding seat that is still available for the month; the platform must reject missing required fields, reject an unchosen manuscript-status value, reject a seat that is already taken or was never offered, suppress the form entirely when the package is fully booked, and on success create a `SUB-<n>` reference, confirm the claimed package and seat, and reduce the package's remaining monthly capacity by one.",
+      "summary": "Submit a manuscript into a package.",
+      "actors": [
+        "author"
+      ],
+      "value": "Captures publishing demand into a paid package while enforcing limited onboarding capacity.",
+      "risk": "high",
+      "cite": {
+        "anchor": "L77-L79",
+        "quote": "- The package detail page offers a submission form with: book title, author name,"
+      },
+      "cites": [
+        {
+          "anchor": "L77-L79",
+          "quote": "- The package detail page offers a submission form with: book title, author name,"
+        },
+        {
+          "anchor": "L89-L93",
+          "quote": "- A valid submission returns to the package page and confirms with"
+        },
+        {
+          "anchor": "L94-L96",
+          "quote": "- When a package has no seats left, its detail page shows"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "The submission form includes book title, author name, email, a genre select defaulting to `Select a genre`, a manuscript status select defaulting to `Select manuscript status`, and an onboarding seat select.",
+          "cite": {
+            "anchor": "L77-L79",
+            "quote": "- The package detail page offers a submission form with: book title, author name,"
+          }
+        },
+        {
+          "text": "The manuscript status select offers exactly `New Manuscript` and `Revised Manuscript`.",
+          "cite": {
+            "anchor": "L80-L80",
+            "quote": "- The manuscript status select offers exactly `New Manuscript` and `Revised Manuscript`."
+          }
+        },
+        {
+          "text": "The seat select offers only seats that are still available this month.",
+          "cite": {
+            "anchor": "L81-L81",
+            "quote": "- The seat select offers only seats that are still available this month."
+          }
+        },
+        {
+          "text": "Submitting with any of book title, author name, email, or genre missing is rejected with `Please fill in the book title, author name, email, and genre.` and creates no submission.",
+          "cite": {
+            "anchor": "L82-L84",
+            "quote": "- Submitting with any of book title, author name, email or genre missing is rejected"
+          }
+        },
+        {
+          "text": "Submitting without choosing a manuscript status is rejected with `Please select whether this is a new or revised manuscript.`",
+          "cite": {
+            "anchor": "L85-L86",
+            "quote": "- Submitting without choosing a manuscript status is rejected with"
+          }
+        },
+        {
+          "text": "Submitting with a seat that is already taken, or not offered, is rejected with `That seat is no longer available this month. Please choose another.`",
+          "cite": {
+            "anchor": "L87-L88",
+            "quote": "- Submitting with a seat that is already taken, or not offered, is rejected with"
+          }
+        },
+        {
+          "text": "A valid submission returns to the package page and confirms the author name, book title, package, seat, `SUB-<n>` reference, and turnaround window.",
+          "cite": {
+            "anchor": "L89-L91",
+            "quote": "- A valid submission returns to the package page and confirms with"
+          }
+        },
+        {
+          "text": "After a valid submission the package's remaining seat count on `/publish` has dropped by one.",
+          "cite": {
+            "anchor": "L92-L93",
+            "quote": "- After a valid submission the package's remaining seat count on `/publish` has"
+          }
+        },
+        {
+          "text": "When a package has no seats left, its detail page shows the fully booked message and offers no submission form.",
+          "cite": {
+            "anchor": "L94-L96",
+            "quote": "- When a package has no seats left, its detail page shows"
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:db566c6120f1e572a4fb431914b8e9765de80e010883ebffb501212b9b696629",
+        "reason": "Same author submission goal as the existing use-case; the revised note about Author's Choice being a seeded fully-booked fixture does not change the submission behavior itself."
+      }
+    },
+    {
+      "temp_ref": "n3",
+      "title": "Track and withdraw a manuscript submission",
+      "description": "An author reviews the manuscript submissions currently held for that browser session on `/my-submissions`, sees each submission's reference, book title, author, package, claimed seat, and status, and can withdraw a submission to remove it from the table, restore the package's seat to the shared monthly pool, and keep the header count synchronized with the number of submissions currently in session; this flow is session-based rather than account-based because the platform has no sign-in.",
+      "summary": "Track and withdraw submitted manuscripts.",
+      "actors": [
+        "author"
+      ],
+      "value": "Gives authors self-serve visibility into current submissions and a way to release scarce onboarding capacity.",
+      "risk": "med",
+      "cite": {
+        "anchor": "L100-L111",
+        "quote": "An author must be able to see what they have submitted and take it back."
+      },
+      "cites": [
+        {
+          "anchor": "L100-L111",
+          "quote": "An author must be able to see what they have submitted and take it back."
+        },
+        {
+          "anchor": "L105-L111",
+          "quote": "- After submitting, `/my-submissions` lists the submission in a table with columns"
+        },
+        {
+          "anchor": "L197-L198",
+          "quote": "- There is no sign-in anywhere on this platform. Identity is the browser session"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "With nothing submitted, `/my-submissions` shows `You haven't submitted a manuscript yet.` and a link to browse packages.",
+          "cite": {
+            "anchor": "L103-L104",
+            "quote": "- With nothing submitted, `/my-submissions` shows"
+          }
+        },
+        {
+          "text": "After submitting, `/my-submissions` lists the submission in a table with columns Reference, Book Title, Author, Package, Seat, and Status.",
+          "cite": {
+            "anchor": "L105-L106",
+            "quote": "- After submitting, `/my-submissions` lists the submission in a table with columns"
+          }
+        },
+        {
+          "text": "A new submission's status is `Under Review`.",
+          "cite": {
+            "anchor": "L107-L107",
+            "quote": "- A new submission's status is `Under Review`."
+          }
+        },
+        {
+          "text": "The header `My Submissions (N)` count matches the number of rows in the table.",
+          "cite": {
+            "anchor": "L108-L108",
+            "quote": "- The header `My Submissions (N)` count matches the number of rows in the table."
+          }
+        },
+        {
+          "text": "Each row offers a `Withdraw` control that removes that row from the table.",
+          "cite": {
+            "anchor": "L109-L109",
+            "quote": "- Each row offers a `Withdraw` control that removes that row from the table."
+          }
+        },
+        {
+          "text": "Withdrawing returns the seat to the pool so the package's remaining seat count on `/publish` goes back up by one.",
+          "cite": {
+            "anchor": "L110-L111",
+            "quote": "- Withdrawing returns the seat to the pool: the package's remaining seat count on"
+          }
+        },
+        {
+          "text": "Submission tracking is tied to the browser session because there is no sign-in anywhere on the platform.",
+          "cite": {
+            "anchor": "L197-L198",
+            "quote": "- There is no sign-in anywhere on this platform. Identity is the browser session"
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:148c5c1877a16c880541ba0f282ea21226700d1e10cdb20a5a17a5322c01bde0",
+        "reason": "Same submission-tracking and withdrawal goal as the existing use-case; the revised note only narrows test cleanup guidance to packages other than Author's Choice."
+      }
+    },
+    {
+      "temp_ref": "n4",
+      "title": "Contact support about a submission",
+      "description": "An author or submitting visitor reaches the support page to get help with a manuscript submission, sees the support hours and phone number, and is instructed to quote their `SUB-` reference number with a direct route back to `/my-submissions` so support contact stays tied to a specific submission.",
+      "summary": "Contact support using a submission reference.",
+      "actors": [
+        "author",
+        "submitting visitor"
+      ],
+      "value": "Makes submission support reachable and helps support staff identify the correct manuscript case.",
+      "risk": "med",
+      "cite": {
+        "anchor": "L173-L176",
+        "quote": "- `/contact` is headed `Contact & support` and shows the support hours"
+      },
+      "cites": [
+        {
+          "anchor": "L173-L176",
+          "quote": "- `/contact` is headed `Contact & support` and shows the support hours"
+        },
+        {
+          "anchor": "L175-L176",
+          "quote": "- `/contact` tells the reader to quote their `SUB-` reference number and links to"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "`/contact` is headed `Contact & support` and shows the support hours `Monday–Friday, 9:00am–5:00pm.` and the phone number `(555) 020-0200`.",
+          "cite": {
+            "anchor": "L173-L174",
+            "quote": "- `/contact` is headed `Contact & support` and shows the support hours"
+          }
+        },
+        {
+          "text": "`/contact` tells the reader to quote their `SUB-` reference number and links to `/my-submissions`.",
+          "cite": {
+            "anchor": "L175-L176",
+            "quote": "- `/contact` tells the reader to quote their `SUB-` reference number and links to"
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:0c53b87b8be21dda3a6a8fd6588b9bc5bf255a30580be4eff11793c6dde3403b",
+        "reason": "Same support-contact goal and submission-reference scope as the existing use-case."
+      }
+    },
+    {
+      "temp_ref": "n5",
+      "title": "Navigate between platform sections",
+      "description": "Any visitor moves between the publishing half and the published-books half of the platform from any page by using the shared site frame: the persistent promotional banner, the header logo back to home, the fixed navigation links, the header search box, the session-scoped `My Submissions (N)` link, and the footer link to support.",
+      "summary": "Navigate the site from any page.",
+      "actors": [
+        "visitor",
+        "author"
+      ],
+      "value": "Keeps both halves of the platform reachable without forcing users back to the home page.",
+      "risk": "med",
+      "cite": {
+        "anchor": "L24-L25",
+        "quote": "Every page must carry the same frame so an author can move between the two halves"
+      },
+      "cites": [
+        {
+          "anchor": "L24-L25",
+          "quote": "Every page must carry the same frame so an author can move between the two halves"
+        },
+        {
+          "anchor": "L30-L37",
+          "quote": "- The header carries the Fernwood Press logo linking to the home page, and three"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "A promotional banner reads `1,200+ authors published · Free ISBN on every package` at the top of every page.",
+          "cite": {
+            "anchor": "L28-L29",
+            "quote": "- A promotional banner reads `1,200+ authors published · Free ISBN on every package`"
+          }
+        },
+        {
+          "text": "The header carries the Fernwood Press logo linking to the home page and three navigation links: `Publish Your Book` to `/publish`, `Published Books` to `/books`, and `Success Stories` to `/success-stories`.",
+          "cite": {
+            "anchor": "L30-L32",
+            "quote": "- The header carries the Fernwood Press logo linking to the home page, and three"
+          }
+        },
+        {
+          "text": "The header carries a search box with the placeholder `Search titles, authors, or genres` and a `Search` button on every page.",
+          "cite": {
+            "anchor": "L33-L34",
+            "quote": "- The header carries a search box with the placeholder"
+          }
+        },
+        {
+          "text": "The header carries a `My Submissions (N)` link, where N is the number of submissions currently held for this browser session.",
+          "cite": {
+            "anchor": "L35-L36",
+            "quote": "- The header carries a `My Submissions (N)` link, where N is the number of"
+          }
+        },
+        {
+          "text": "The footer links to `Contact & support`.",
+          "cite": {
+            "anchor": "L37-L37",
+            "quote": "- The footer links to `Contact & support`."
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:4cacd50e093a9f4e1eac4caf77a9775c725ba9b37871acb0d3c8e224de4a3bc9",
+        "reason": "Same cross-site navigation goal as the existing use-case."
+      }
+    },
+    {
+      "temp_ref": "n6",
+      "title": "Discover publishing and catalog options from the home page",
+      "description": "A visitor lands on the home page and discovers both halves of the platform through a publishing-focused heading, a call to start publishing, the current published-books count, a four-package preview with package names, taglines, prices, and links, a recently published showcase linking into book details, and direct routes to the full package comparison page and the full published-books catalog.",
+      "summary": "Use the home page to discover both platform halves.",
+      "actors": [
+        "visitor",
+        "author"
+      ],
+      "value": "Turns the home page into the primary entry point for both publishing conversion and catalog discovery.",
+      "risk": "med",
+      "cite": {
+        "anchor": "L41-L41",
+        "quote": "The home page must present both halves of the platform and the current catalog size."
+      },
+      "cites": [
+        {
+          "anchor": "L41-L41",
+          "quote": "The home page must present both halves of the platform and the current catalog size."
+        },
+        {
+          "anchor": "L47-L52",
+          "quote": "- A `Choose a publishing package` section shows all four packages, each with its"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "The page heading is `Publish your book with Fernwood Press`.",
+          "cite": {
+            "anchor": "L44-L44",
+            "quote": "- The page heading is `Publish your book with Fernwood Press`."
+          }
+        },
+        {
+          "text": "A `Start Publishing` call to action leads to the publishing packages page.",
+          "cite": {
+            "anchor": "L45-L45",
+            "quote": "- A `Start Publishing` call to action leads to the publishing packages page."
+          }
+        },
+        {
+          "text": "The page states the catalog size as `<count>+ books published through our platform`.",
+          "cite": {
+            "anchor": "L46-L46",
+            "quote": "- The page states the catalog size as `<count>+ books published through our platform`."
+          }
+        },
+        {
+          "text": "A `Choose a publishing package` section shows all four packages, each with its name, tagline, price, and a `View package` link.",
+          "cite": {
+            "anchor": "L47-L48",
+            "quote": "- A `Choose a publishing package` section shows all four packages, each with its"
+          }
+        },
+        {
+          "text": "A `Recently published` section shows four book tiles, and each tile's title links to that book's detail page.",
+          "cite": {
+            "anchor": "L49-L50",
+            "quote": "- A `Recently published` section shows four book tiles, and each tile's title links"
+          }
+        },
+        {
+          "text": "`Compare all packages →` leads to `/publish`, and `Browse all published books →` leads to `/books`.",
+          "cite": {
+            "anchor": "L51-L52",
+            "quote": "- `Compare all packages →` leads to `/publish`, and"
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:da7d5de3eb6297dcff873b13a28b656043766b8a90a0363880245e6e0de6057f",
+        "reason": "Same home-page discovery goal as the existing use-case."
+      }
+    },
+    {
+      "temp_ref": "n7",
+      "title": "Browse published books by genre",
+      "description": "Anyone browses the showcase catalog of books published through Fernwood Press by opening `/books`, reviewing genre counts, and drilling into a genre listing that reports the full match count, supports sorting by title or rating, allows 6, 12, or 20 results per page, switches between grid and list views without changing which books are shown, and exposes each book through linked tiles; this browse half is explicitly a showcase rather than a storefront, so it has no price, basket, or checkout flow.",
+      "summary": "Browse the showcase catalog by genre.",
+      "actors": [
+        "visitor"
+      ],
+      "value": "Makes the published catalog discoverable by genre while reinforcing Fernwood Press's showcase credibility.",
+      "risk": "med",
+      "cite": {
+        "anchor": "L115-L115",
+        "quote": "Anyone must be able to browse the catalog of books published through the platform."
+      },
+      "cites": [
+        {
+          "anchor": "L115-L115",
+          "quote": "Anyone must be able to browse the catalog of books published through the platform."
+        },
+        {
+          "anchor": "L120-L128",
+          "quote": "- `/books` lists every genre with the number of titles in it, and each genre name"
+        },
+        {
+          "anchor": "L15-L16",
+          "quote": "The catalog is a showcase, not a storefront — there is no"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "The published-books half is a showcase, not a storefront: there is no price, no basket, and no checkout anywhere in it.",
+          "cite": {
+            "anchor": "L15-L16",
+            "quote": "The catalog is a showcase, not a storefront — there is no"
+          }
+        },
+        {
+          "text": "`/books` states the catalog size as `<total> books published through Fernwood Press so far.`",
+          "cite": {
+            "anchor": "L118-L119",
+            "quote": "- `/books` states the catalog size as"
+          }
+        },
+        {
+          "text": "`/books` lists every genre with the number of titles in it, and each genre name links to that genre's listing page.",
+          "cite": {
+            "anchor": "L120-L121",
+            "quote": "- `/books` lists every genre with the number of titles in it, and each genre name"
+          }
+        },
+        {
+          "text": "A genre listing shows `<total> book(s) found`, counting every match in the genre rather than only the number currently displayed.",
+          "cite": {
+            "anchor": "L122-L123",
+            "quote": "- A genre listing shows `<total> book(s) found`, counting **every** match in the"
+          }
+        },
+        {
+          "text": "The listing offers a sort control with `Title (A-Z)` as the default and `Rating (high to low)`; choosing rating reorders the tiles highest-rating first.",
+          "cite": {
+            "anchor": "L124-L125",
+            "quote": "- The listing offers a sort control with `Title (A-Z)` (the default) and"
+          }
+        },
+        {
+          "text": "The listing offers a `Show` control with 6, 12, and 20 per page; the default shows 20, and choosing 6 renders exactly six tiles while the found count stays unchanged.",
+          "cite": {
+            "anchor": "L126-L127",
+            "quote": "- The listing offers a `Show` control with 6, 12 and 20 per page; the default shows"
+          }
+        },
+        {
+          "text": "The listing offers `Grid view` and `List view`, and both show the same books.",
+          "cite": {
+            "anchor": "L128-L128",
+            "quote": "- The listing offers `Grid view` and `List view`, and both show the same books."
+          }
+        },
+        {
+          "text": "Every tile shows a cover image, the title as a link, the author, `Rating: <n>`, and the format.",
+          "cite": {
+            "anchor": "L129-L130",
+            "quote": "- Every tile shows a cover image, the title as a link, the author, `Rating: <n>`"
+          }
+        },
+        {
+          "text": "A genre that does not exist returns a 404 and shows `No books found in this genre.`",
+          "cite": {
+            "anchor": "L131-L131",
+            "quote": "- A genre that does not exist returns a 404 and shows `No books found in this genre.`"
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:2a85d849ef7eb11c7b43db4c6553a6aff1d7bf90f22914daa2a2402309b31d90",
+        "reason": "Same genre-browsing catalog goal as the existing use-case."
+      }
+    },
+    {
+      "temp_ref": "n8",
+      "title": "Search the published-books catalog",
+      "description": "Anyone uses the persistent header search box to find books already published through the platform, with the term sent to `/search` in a shareable URL, matching performed case-insensitively across title, author, and genre, and results rendered as linked book tiles that either return the matching books or show an explicit no-results message even when the search was submitted empty.",
+      "summary": "Search published books from the header.",
+      "actors": [
+        "visitor"
+      ],
+      "value": "Lets visitors jump directly to relevant published books without browsing through genre listings.",
+      "risk": "med",
+      "cite": {
+        "anchor": "L135-L145",
+        "quote": "Anyone must be able to find a published book from the header search box."
+      },
+      "cites": [
+        {
+          "anchor": "L135-L145",
+          "quote": "Anyone must be able to find a published book from the header search box."
+        },
+        {
+          "anchor": "L146-L151",
+          "quote": "- Each result tile shows the cover, the title as a link to the book, the author,"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "Searching sends the term to `/search` as a shareable URL carrying the term, and the results page is headed `Search results for \"<term>\"`.",
+          "cite": {
+            "anchor": "L138-L139",
+            "quote": "- Searching sends the term to `/search` as a shareable URL carrying the term, and"
+          }
+        },
+        {
+          "text": "A title match can return exactly one result, as with searching `The Iron Court` returning `The Iron Court` by `Branwen Oduya`.",
+          "cite": {
+            "anchor": "L140-L141",
+            "quote": "- A term that matches a title returns that book — searching `The Iron Court`"
+          }
+        },
+        {
+          "text": "Matching is case-insensitive: a lower-case term returns the same results as the same term upper-cased.",
+          "cite": {
+            "anchor": "L142-L143",
+            "quote": "- Matching is case-insensitive: a lower-case term returns the same results as the"
+          }
+        },
+        {
+          "text": "A term is matched against title, author, and genre, so searching a genre name such as `Mystery` returns that genre's books.",
+          "cite": {
+            "anchor": "L144-L145",
+            "quote": "- A term is matched against title, author **and** genre, so searching a genre name"
+          }
+        },
+        {
+          "text": "Each result tile shows the cover, the title as a link to the book, the author, `Rating: <n>`, and the format.",
+          "cite": {
+            "anchor": "L146-L147",
+            "quote": "- Each result tile shows the cover, the title as a link to the book, the author,"
+          }
+        },
+        {
+          "text": "A term that matches nothing shows `No books match your search` rather than an empty page or an error.",
+          "cite": {
+            "anchor": "L148-L149",
+            "quote": "- A term that matches nothing shows `No books match your search` rather than an"
+          }
+        },
+        {
+          "text": "Submitting the search box with no term shows the same `No books match your search` message.",
+          "cite": {
+            "anchor": "L150-L151",
+            "quote": "- Submitting the search box with no term shows the same `No books match your search`"
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:d9eaa354929224ef0f02a76fcf8cc71fa15f892d8620cc78b79806d373d5b834",
+        "reason": "Same published-books search goal as the existing use-case."
+      }
+    },
+    {
+      "temp_ref": "n9",
+      "title": "View a published book's details",
+      "description": "A visitor opens a published book's detail page to inspect enough bibliographic information to trust the book entry, including authorship, genre, rating, format, ISBN, publication month, blurb, and cover image, while also seeing which Fernwood package published the book and getting a direct call to action back into `/publish`; a missing book must return a 404 instead of a broken detail page.",
+      "summary": "View a published book’s detail page.",
+      "actors": [
+        "visitor"
+      ],
+      "value": "Builds trust in showcased books and routes interested readers back into the publishing funnel.",
+      "risk": "med",
+      "cite": {
+        "anchor": "L155-L156",
+        "quote": "A book's page must carry enough bibliographic detail to be credible, and must route"
+      },
+      "cites": [
+        {
+          "anchor": "L155-L156",
+          "quote": "A book's page must carry enough bibliographic detail to be credible, and must route"
+        },
+        {
+          "anchor": "L159-L165",
+          "quote": "- The page shows the title, `by <author>`, the genre, `Rating: <n>`, the format,"
+        }
+      ],
+      "criteria": [
+        {
+          "text": "The page shows the title, `by <author>`, the genre, `Rating: <n>`, the format, a valid `ISBN: <isbn-13>`, `Published <Month YYYY>`, and the blurb.",
+          "cite": {
+            "anchor": "L159-L160",
+            "quote": "- The page shows the title, `by <author>`, the genre, `Rating: <n>`, the format,"
+          }
+        },
+        {
+          "text": "The page shows a cover image for that book.",
+          "cite": {
+            "anchor": "L161-L161",
+            "quote": "- The page shows a cover image for that book."
+          }
+        },
+        {
+          "text": "The page states `Published via our <package name> package.`, linking to that package.",
+          "cite": {
+            "anchor": "L162-L163",
+            "quote": "- The page states which package the book was published through, as"
+          }
+        },
+        {
+          "text": "A `Publish your book like this one` call to action leads to `/publish`.",
+          "cite": {
+            "anchor": "L164-L164",
+            "quote": "- A `Publish your book like this one` call to action leads to `/publish`."
+          }
+        },
+        {
+          "text": "Requesting a book that does not exist returns a 404.",
+          "cite": {
+            "anchor": "L165-L165",
+            "quote": "- Requesting a book that does not exist returns a 404."
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:0e721b23c94c374f6e1470e61e74c45b718610498a5d335e50fc9260675253d4",
+        "reason": "Same book-detail viewing goal as the existing use-case."
+      }
+    },
+    {
+      "temp_ref": "n10",
+      "title": "Read author success stories",
+      "description": "A visitor reads the `/success-stories` page to see testimonial-style social proof from published authors, with each testimonial tied back to a specific author, book, and publishing package so the stories reinforce the credibility of Fernwood Press's publishing offering.",
+      "summary": "Read testimonials from published authors.",
+      "actors": [
+        "visitor"
+      ],
+      "value": "Provides lightweight social proof that can increase trust in the publishing platform.",
+      "risk": "low",
+      "cite": {
+        "anchor": "L170-L172",
+        "quote": "- `/success-stories` is headed `Author success stories` and shows six testimonials."
+      },
+      "criteria": [
+        {
+          "text": "`/success-stories` is headed `Author success stories` and shows six testimonials.",
+          "cite": {
+            "anchor": "L170-L170",
+            "quote": "- `/success-stories` is headed `Author success stories` and shows six testimonials."
+          }
+        },
+        {
+          "text": "Each testimonial shows the quote, the author's name, a link to that author's book on the platform, and the package they used.",
+          "cite": {
+            "anchor": "L171-L172",
+            "quote": "- Each testimonial shows the quote, the author's name, a link to that author's book"
+          }
+        }
+      ],
+      "depends_on_hint": [],
+      "matches_existing": {
+        "cid": "sha256:0dd03cef92ed6e2977c12e29489de9e1b929bac42f9c7992af78f72926d3b9f3",
+        "reason": "Same testimonial-reading goal as the existing use-case."
+      }
+    }
+  ]
+}

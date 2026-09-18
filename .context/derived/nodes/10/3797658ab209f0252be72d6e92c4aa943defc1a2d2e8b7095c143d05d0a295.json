@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When a package has no seats left, its detail page offers no submission form.","kind":"forbidden-presence","risk":"high","derived":true,"expected_answer":{"operator":"exists","operand":"submission form"}}}

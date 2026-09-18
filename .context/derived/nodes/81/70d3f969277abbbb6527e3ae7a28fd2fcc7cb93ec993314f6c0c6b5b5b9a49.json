@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"An existing published-book detail page links the `<package name>` in the published-via statement to that package page.","kind":"propagation","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"the `<package name>` text in the published-via statement links to the corresponding package page"}}}

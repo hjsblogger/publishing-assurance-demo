@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After selecting `Contact & support` from the footer, the page heading `Contact & support` is visible.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"exists","operand":"page heading `Contact & support` is visible"}}}

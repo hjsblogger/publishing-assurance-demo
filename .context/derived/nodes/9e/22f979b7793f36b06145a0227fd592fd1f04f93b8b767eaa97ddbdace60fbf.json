@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After a successful submission, `/my-submissions` shows a row for the manuscript that was just submitted.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"a `/my-submissions` row whose Book Title, Author, Package, and Seat values identify the manuscript just submitted"}}}

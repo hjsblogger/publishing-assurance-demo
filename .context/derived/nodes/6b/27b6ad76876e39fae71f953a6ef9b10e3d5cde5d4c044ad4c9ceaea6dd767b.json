@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When the current browser session has at least one submission, `/my-submissions` shows a table with the columns Reference, Book Title, Author, Package, Seat and Status.","kind":"absolute","risk":"med","derived":true,"expected_answer":{"operator":"contains","operand":"table columns Reference, Book Title, Author, Package, Seat and Status"}}}

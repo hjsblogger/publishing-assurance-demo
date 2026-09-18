@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each fully booked package card offers `View details`.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"forall","operand":"package with no seats left offers `View details`"}}}

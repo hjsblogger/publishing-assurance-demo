@@ -1,0 +1,9 @@
+anchor: ac-15
+combinatorial:
+  reason: (risk-judged strength 2 because no money, auth, or data-loss factors apply; effective_t=2, note `strength=2`) produced four sort/show/view combinations. Under max_pairs=3, this retained the default-state valid-genre baseline (`Title (A-Z)` default, `Show` 20, `Grid view`) and evicted the narrower control-variation journeys for rating sort, page-size switching, and layout toggling.
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: Equivalence partitioning (`eqp`) and Pagination / sort / filter (`pagination`) via the Search / list profile. Pairwise `covering_array` on the explicit listing controls at strength=2 (risk-judged strength 2 because no money, auth, or data-loss factors apply; effective_t=2, note `strength=2`) produced four sort/show/view combinations. Under max_pairs=3, this retained the default-state valid-genre baseline (`Title (A-Z)` default, `Show` 20, `Grid view`) and evicted the narrower control-variation journeys for rating sort, page-size switching, and layout toggling.'

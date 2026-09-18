@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"After a valid submission, the package's remaining seat count on `/publish` has dropped by one.","kind":"delta","risk":"high","derived":true,"expected_answer":{"operator":"changed-by","operand":-1,"baseline":"pre-submit remaining seat count for the selected package on `/publish`"}}}

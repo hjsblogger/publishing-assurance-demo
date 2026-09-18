@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Activating the `/my-submissions` link on `/contact` navigates the reader to `/my-submissions`.","kind":"absolute","risk":"low","derived":true,"expected_answer":{"operator":"contains","operand":"/my-submissions"}}}

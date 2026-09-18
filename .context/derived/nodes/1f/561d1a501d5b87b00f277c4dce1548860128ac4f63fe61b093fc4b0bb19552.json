@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"An existing published-book detail page offers a `Publish your book like this one` call to action that leads to `/publish`.","kind":"propagation","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":"/publish"}}}

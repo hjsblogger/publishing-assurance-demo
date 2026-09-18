@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When `/my-submissions` shows submission rows, the header `My Submissions (N)` count equals the number of rows in the table.","kind":"count","risk":"med","derived":true,"expected_answer":{"operator":"equals","operand":{"derived":"number of submission rows shown in the `/my-submissions` table"}}}}

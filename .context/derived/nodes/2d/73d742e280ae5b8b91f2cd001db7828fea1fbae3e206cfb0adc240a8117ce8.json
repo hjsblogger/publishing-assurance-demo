@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"`/contact` instructs the reader to quote their `SUB-` reference number when asking for help about a submission.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"exists","operand":"instruction to quote their `SUB-` reference number"}}}

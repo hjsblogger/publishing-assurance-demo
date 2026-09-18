@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When the current browser session has no submissions, `/my-submissions` shows a link to browse packages.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"a link to browse packages is shown on `/my-submissions`"}}}

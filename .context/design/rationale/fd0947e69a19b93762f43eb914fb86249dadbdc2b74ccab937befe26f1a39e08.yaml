@@ -1,0 +1,9 @@
+anchor: ac-112
+combinatorial:
+  reason: 'Techniques: Boundary value analysis on the zero-seats-left boundary; Negative / error because the user must be blocked from starting a submission; Persistence of the shared-capacity state in the rendered package detail page. Risk judged high because this terminal capacity state prevents futile submissions and misleading availability claims.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: Boundary value analysis on the zero-seats-left boundary; Negative / error because the user must be blocked from starting a submission; Persistence of the shared-capacity state in the rendered package detail page. Risk judged high because this terminal capacity state prevents futile submissions and misleading availability claims.'

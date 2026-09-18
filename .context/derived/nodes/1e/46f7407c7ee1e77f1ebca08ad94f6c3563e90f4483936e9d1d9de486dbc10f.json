@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Every page's header includes a `Success Stories` navigation link.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"forall","operand":"header navigation link `Success Stories` is visible"}}}

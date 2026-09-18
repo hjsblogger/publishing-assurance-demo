@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "source_id": "book-publishing-website",
+  "backing_path": "/Users/hjsblogger/LambdaTest/sales-engineering/agent-assurance-demo/requirements/book-publishing-website.md",
+  "head_pin": "sha256:84c759e9298abd134a832147c1d7a32f00b7c503f57e3b06d39aa11164454d8d",
+  "created": "2026-09-18T07-08-26-722Z",
+  "skipped_arms": "this release plans changes only — blast-radius impact and drift meaning-checks are not measured, and REMOVE rows are never executed automatically",
+  "note": "suite untouched; graph updated",
+  "changeset": [],
+  "rows": [
+    {
+      "kind": "ADD",
+      "origin": "content-change",
+      "ref": "ac-24",
+      "reason": "no live test verifies this acceptance criterion",
+      "provenance": "gaps engine (design) — uncovered AC of touched use-case uc-2",
+      "action": "kane-cli design tests --use-case uc-2"
+    },
+    {
+      "kind": "ADD",
+      "origin": "content-change",
+      "ref": "ac-53",
+      "reason": "no live test verifies this acceptance criterion",
+      "provenance": "gaps engine (design) — uncovered AC of touched use-case uc-7",
+      "action": "kane-cli design tests --use-case uc-7",
+      "applied": {
+        "at": "2026-09-18T07:11:28.970Z",
+        "outcome": "approved"
+      }
+    },
+    {
+      "kind": "ADD",
+      "origin": "content-change",
+      "ref": "ac-85",
+      "reason": "no live test verifies this acceptance criterion",
+      "provenance": "gaps engine (design) — uncovered AC of touched use-case uc-5",
+      "action": "kane-cli design tests --use-case uc-5",
+      "applied": {
+        "at": "2026-09-18T07:13:51.898Z",
+        "outcome": "approved"
+      }
+    },
+    {
+      "kind": "ADD",
+      "origin": "content-change",
+      "ref": "ac-95",
+      "reason": "no live test verifies this acceptance criterion",
+      "provenance": "gaps engine (design) — uncovered AC of touched use-case uc-1",
+      "action": "kane-cli design tests --use-case uc-1",
+      "applied": {
+        "at": "2026-09-18T07:16:41.579Z",
+        "outcome": "approved"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Every page's header includes a `My Submissions (N)` link with a numeric count in parentheses.","kind":"presence","risk":"low","derived":true,"expected_answer":{"operator":"forall","operand":"header link labelled `My Submissions` with a numeric count in parentheses is visible"}}}

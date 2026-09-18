@@ -1,0 +1,9 @@
+anchor: ac-38
+combinatorial:
+  reason: Applied equivalence partitioning to separate the page's static support-details promise from its route-back-to-submissions promise. Negative, boundary, auth, and state-flow techniques were not applicable because the cited source specifies no input, failure mode, access gate, or multi-step state transition. Budget ceiling is 3 pairs; this scenario was kept because all 2 candidate scenarios fit within budget.
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: Applied equivalence partitioning to separate the page's static support-details promise from its route-back-to-submissions promise. Negative, boundary, auth, and state-flow techniques were not applicable because the cited source specifies no input, failure mode, access gate, or multi-step state transition. Budget ceiling is 3 pairs; this scenario was kept because all 2 candidate scenarios fit within budget.

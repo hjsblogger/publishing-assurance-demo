@@ -1,0 +1,9 @@
+anchor: ac-123
+combinatorial:
+  reason: 'Techniques: equivalence partitioning + negative / error + state / flow. I used two outcome-changing session partitions — the browser session that created the submission and a different browser session — because the source makes browser-session scoping an explicit visibility rule. No covering array was needed because there is one interaction axis; the risk-judged default strength would be 2 because no money, auth, or data-loss factor applies to this use-case.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Techniques: equivalence partitioning + negative / error + state / flow. I used two outcome-changing session partitions — the browser session that created the submission and a different browser session — because the source makes browser-session scoping an explicit visibility rule. No covering array was needed because there is one interaction axis; the risk-judged default strength would be 2 because no money, auth, or data-loss factor applies to this use-case.'

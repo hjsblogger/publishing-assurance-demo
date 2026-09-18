@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"On a package detail page that accepts submissions, the submission form includes an onboarding seat select.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"exists","operand":"onboarding seat select"}}}

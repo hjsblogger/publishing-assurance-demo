@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"`/my-submissions` only shows submissions created in the current browser session.","kind":"forbidden-presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"a submission created in a different browser session appears in the current browser session's `/my-submissions` view"}}}

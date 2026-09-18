@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The `My Submissions (N)` header link shows a count N equal to the number of submissions currently held for the browser session.","kind":"count","risk":"low","derived":true,"expected_answer":{"operator":"equals","operand":{"derived":"number of submissions currently held for this browser session"}}}}

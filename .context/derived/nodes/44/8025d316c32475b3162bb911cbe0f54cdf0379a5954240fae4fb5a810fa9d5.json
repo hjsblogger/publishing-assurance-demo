@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"An existing published-book detail page shows the publication date in the form `Published <Month YYYY>`.","kind":"presence","risk":"med","derived":true,"expected_answer":{"operator":"exists","operand":"text matching `Published <Month YYYY>`"}}}

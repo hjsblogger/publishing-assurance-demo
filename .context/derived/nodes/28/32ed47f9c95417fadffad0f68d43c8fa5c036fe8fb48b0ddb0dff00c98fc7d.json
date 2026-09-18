@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each package card with seats remaining shows the availability message `<n> seats left this month`.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"forall","operand":"package with seats left shows `<n> seats left this month`"}}}

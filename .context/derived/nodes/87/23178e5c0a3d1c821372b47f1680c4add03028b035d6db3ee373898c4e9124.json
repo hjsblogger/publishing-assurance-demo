@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"Each package card lists that package's features.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"forall","operand":"package card lists that package's features"}}}

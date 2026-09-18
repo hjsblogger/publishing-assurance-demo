@@ -1,0 +1,9 @@
+anchor: ac-47
+combinatorial:
+  reason: 'Applied source-grounded happy-path coverage to the explicit catalog outbound route. Kept separate from the recently published title route because the outcomes differ: this path must land on `/books`, while a recent-book title must land on a specific book detail page. Budget rank 3/4 because it covers one of the use-case''s named public branch choices.'
+  strength: 2
+deferred_bindings: 0
+expected_how: 'expected_mode: authored'
+profile_family: unspecified
+surface_state: absent
+technique: 'Applied source-grounded happy-path coverage to the explicit catalog outbound route. Kept separate from the recently published title route because the outcomes differ: this path must land on `/books`, while a recent-book title must land on a specific book detail page. Budget rank 3/4 because it covers one of the use-case''s named public branch choices.'

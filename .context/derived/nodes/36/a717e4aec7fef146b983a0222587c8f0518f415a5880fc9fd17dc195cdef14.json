@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The `/publish` page lists exactly four publishing packages.","kind":"count","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":4}}}
